@@ -1,0 +1,35 @@
+
+OpenDocument="main.c", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/Core/Src/main.c", Line=95
+OpenDocument="main_task.cpp", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/Tasks/main_task.cpp", Line=82
+OpenDocument="m3508_task.hpp", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/Resources/Inc/m3508_task.hpp", Line=0
+OpenDocument="stm32f4xx_hal_spi.c", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c", Line=1274
+OpenDocument="gimbal_task.hpp", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/Tasks/gimbal_task.hpp", Line=0
+OpenDocument="chassis_task.cpp", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/Tasks/chassis_task.cpp", Line=27
+OpenDocument="stm32f4xx_hal_can.c", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c", Line=1719
+OpenDocument="arm_mat_vec_mult_f32.c", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/components/CMSIS-DSP/Source/MatrixFunctions/arm_mat_vec_mult_f32.c", Line=360
+OpenDocument="stm32f4xx_hal.c", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c", Line=317
+OpenDocument="imu_task.cpp", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/Tasks/imu_task.cpp", Line=6
+OpenDocument="m3508_task.cpp", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/Resources/Src/m3508_task.cpp", Line=12
+OpenDocument="gimbal_task.cpp", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/Tasks/gimbal_task.cpp", Line=0
+OpenDocument="arm_atan2_f32.c", FilePath="C:/heixang.huang/RM_IDE/RM_Code/project/components/CMSIS-DSP/Source/FastMathFunctions/arm_atan2_f32.c", Line=52
+OpenToolbar="Debug", Floating=0, x=0, y=0
+OpenWindow="Call Stack", DockArea=RIGHT, x=0, y=1, w=300, h=212, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Registers 1", DockArea=RIGHT, x=0, y=2, w=300, h=216, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, FilteredItems=[], RefreshRate=1
+OpenWindow="Source Files", DockArea=LEFT, x=0, y=0, w=472, h=178, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Disassembly", DockArea=RIGHT, x=0, y=0, w=300, h=171, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Watched Data 1", DockArea=LEFT, x=0, y=1, w=472, h=422, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Data Sampling", DockArea=BOTTOM, x=0, y=0, w=923, h=323, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, VisibleTab=0, UniformSampleSpacing=0
+OpenWindow="Timeline", DockArea=BOTTOM, x=1, y=0, w=996, h=323, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=1, DataPaneShown=1, PowerPaneShown=1, CodePaneShown=1, PinCursor="Cursor Movable", TimePerDiv="1 ns / Div", TimeStampFormat="Time", DataGraphDrawAsPoints=0, DataGraphLegendShown=1, DataGraphUniformSampleSpacing=0, DataGraphLegendPosition="823;0", PowerGraphDrawAsPoints=0, PowerGraphLegendShown=1, PowerGraphAvgFilterTime=Off, PowerGraphAvgFilterLen=Off, PowerGraphUniformSampleSpacing=0, PowerGraphLegendPosition="795;-1", CodeGraphLegendShown=1, CodeGraphLegendPosition="809;0"
+TableHeader="Call Stack", SortCol="Function", SortOrder="ASCENDING", VisibleCols=["Function";"Stack Frame";"Source";"PC";"Return Address";"Stack Used"], ColWidths=[100;100;100;100;112;100]
+TableHeader="Source Files", SortCol="File", SortOrder="DESCENDING", VisibleCols=["File";"Status";"Size";"#Insts";"Path"], ColWidths=[205;100;100;100;1176]
+TableHeader="Data Sampling Table", SortCol="Index", SortOrder="ASCENDING", VisibleCols=["Index";"Time"], ColWidths=[100;100]
+TableHeader="Data Sampling Setup", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Type";"Value";"Min";"Max";"Average";"# Changes";"Min. Change";"Max. Change"], ColWidths=[100;100;100;100;100;100;100;107;116]
+TableHeader="Power Sampling", SortCol="Index", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Ch 0"], ColWidths=[100;100;100]
+TableHeader="Registers 1", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Description"], ColWidths=[100;118;259]
+TableHeader="Watched Data 1", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Value";"Location";"Refresh"], ColWidths=[158;100;100;100]
+TableHeader="RegisterSelectionDialog", SortCol="None", SortOrder="ASCENDING", VisibleCols=[], ColWidths=[]
+TableHeader="TargetExceptionDialog", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Address";"Description"], ColWidths=[200;100;100;351]
+WatchedExpression="euler_angles", RefreshRate=5, Window=Watched Data 1
+WatchedExpression="main_task.cpp::tick", RefreshRate=5, Window=Watched Data 1
+WatchedExpression="motor_3508", RefreshRate=5, Window=Watched Data 1
+WatchedExpression="motor_dm4310", Window=Watched Data 1
