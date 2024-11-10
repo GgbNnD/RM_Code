@@ -30,6 +30,9 @@ extern Joint_Motor_t motor_dm4310;
 void gimbal_init(void);
 void gimbal_set_speed(float target_speed);
 void gimbal_set_position(float target_position ,float *euler_angles);
+void gimbal_pitch_contrl(float *pitch);
+void gimbal_tor_control(float target_speed);
+void gimbal_tor_test(float target_speed);
 #ifdef __cplusplus
 }
 #endif

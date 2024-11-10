@@ -34,6 +34,12 @@ extern float euler_angles[3];
 extern float gimbal_euler_angles[3];
 
 float gimbal_angle = 0;
+float gimbal_pitch = 0;
+
+float gimbal_imu_angle = 0;
+float gimbal_imu_angleplus = 0;
+float chassis_imu_angle = 0;
+float chassis_imu_angleplus = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -87,49 +93,69 @@ void MainTask(void)
     {
         chassis_normal(0,0);
         gimbal_set_speed(0);
+        gimbal_pitch = 60;
+        gimbal_pitch_contrl(&gimbal_pitch);
+        gimbal_pitch = 0;
     }
     else{
-    if(tick > 1000)
-    {
-        
         ImuUpdate();
+    if(tick == 1)
+    {
+        gimbal_imu_angle = gimbal_euler_angles[0];
+        chassis_imu_angle = euler_angles[0];
+    }
+    else if(tick > 1 && tick < 1000)
+    {
+        gimbal_imu_angleplus += gimbal_euler_angles[0] - gimbal_imu_angle;
+        chassis_imu_angleplus += euler_angles[0] - chassis_imu_angle;
+    }
+    else if(tick == 1000)
+    {
+        gimbal_imu_angleplus = gimbal_imu_angleplus/998;
+        chassis_imu_angleplus = chassis_imu_angleplus/998;
+        gimbal_angle = (gimbal_euler_angles[0]-gimbal_imu_angleplus)/3.1415926*180 + 180;
+    }
+    else if(tick > 1000)
+    {
+        euler_angles[0] = euler_angles[0] - chassis_imu_angleplus;
+        if(euler_angles[0] < -3.1415926)
+        {
+            euler_angles[0] = euler_angles[0] + 2*3.1415926;
+        }
+        gimbal_euler_angles[0] = gimbal_euler_angles[0] - gimbal_imu_angleplus;
+        if(gimbal_euler_angles[0] < -3.1415926)
+        {
+            gimbal_euler_angles[0] = gimbal_euler_angles[0] + 2*3.1415926;
+        }
+//        gimbal_tor_test(5);
         gimbal_angle -= rc_ptr->rc_lh()*0.1;
         gimbal_set_position(gimbal_angle , gimbal_euler_angles);
+        gimbal_pitch -= rc_ptr->rc_lv()*0.03;
+        gimbal_pitch_contrl(&gimbal_pitch);
     //TODO:测试模式转变
         if(rc_ptr->rc_l_switch() == remote_control::kSwitchStateUp)
         {
             float vx = rc_ptr->rc_rv()*2000;
             float vy = rc_ptr->rc_rh()*3000;
-            chassis_normal(vx,vy);
+            gimbalbased_chassis_move(vx,vy,0,&motor_dm4310);
             
         }
-//        else if(rc_ptr->rc_l_switch() == remote_control::kSwitchStateMid)
-//        {
-//            //gimbal_angle += rc_ptr->rc_rv()*10;
-//            //gimbal_set_position(gimbal_angle , euler_angles);
-//            gimbal_set_speed(-rc_ptr->rc_lh()*8);
-//            float vx = rc_ptr->rc_rv()*2000;
-//            float vy = rc_ptr->rc_rh()*3000;
-//            chassis_follow_gimbal(vx,vy,euler_angles,gimbal_euler_angles);
-//            
-//        }
+        else if(rc_ptr->rc_l_switch() == remote_control::kSwitchStateMid)
+        {
+            float vx = rc_ptr->rc_rv()*2000;
+            float vy = rc_ptr->rc_rh()*3000;
+            chassis_follow_gimbal(vx,vy,&motor_dm4310);
+            
+        }
        else if(rc_ptr->rc_l_switch() == remote_control::kSwitchStateDown)
        {
            float vx = rc_ptr->rc_rv()*2000;
            float vy = rc_ptr->rc_rh()*3000;
-           chassis_cyro(vx,vy,2500);
+           gimbalbased_chassis_move(vx,vy,2500,&motor_dm4310);
            
        }
-//
-//      //TODO:3508测试
-//      //TODO:pid控制速度稳定
-//      m3508_test();
-//
-//      //TODO:dm4310测试
-//      gimbal_set_speed(-rc_ptr->rc_lh()*8);
 
-        //TODO:跟随测试
-//      chassis_follow_gimbal(0,0,euler_angles,gimbal_euler_angles);
+
     }
     }
 

@@ -99,7 +99,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
     {
         if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header1, can1_rx_data) == HAL_OK) // 获得接收到的数据头和数据
         {
-            if (rx_header1.StdId == 0x00)
+            if (rx_header1.StdId == 0x13)
             { // 帧头校验
                 // 校验通过进行具体数据处理
                 dm4310_fbdata(&motor_dm4310 ,can1_rx_data,8);

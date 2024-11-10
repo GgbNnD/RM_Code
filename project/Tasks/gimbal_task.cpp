@@ -15,6 +15,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "gimbal_task.hpp"
 #include "pid.hpp"
+#include "HW_can.hpp"
 /* Private macro -------------------------------------------------------------*/
 /* Private constants ---------------------------------------------------------*/
 /* Private types -------------------------------------------------------------*/
@@ -23,13 +24,17 @@
 Joint_Motor_t motor_dm4310;
 pid gimbal_position_pid;
 pid gimbal_tor_pid;
+
+//TODO:pitch角度限制
+const float pitch_max = 29;
+const float pitch_min = -24;
 /* Private function prototypes -----------------------------------------------*/
 void gimbal_init(void)
 {
     dm4310_init(&motor_dm4310,MIT_MODE,3);
-    gimbal_position_pid.pid_init(0.5,0.01,0,0,6);
-    gimbal_tor_pid.pid_init(0.5,0.01,0,0,6);
-    mit_ctrl(&hcan1,3,0,0,0,0,0);
+    gimbal_position_pid.pid_init(0.6,0.01,0,0,6);
+    gimbal_tor_pid.pid_init(1,0,0,2,6);
+    mit_ctrl(&hcan1,3,0,0,0,1,0);
 }
 
 void gimbal_set_speed(float target_speed)
@@ -111,11 +116,43 @@ void gimbal_set_position(float target_position ,float *euler_angles)
             }
         }
     }
-    mit_ctrl(&hcan1,3,0,target_w,0,1,0);
+//    mit_ctrl(&hcan1,3,0,target_w,0,1,0);
+    gimbal_tor_control(target_w);
 }
 
-void gimbal_tor_control(float target_position ,float *euler_angles)
+void gimbal_tor_control(float target_speed)
 {
-    
+    gimbal_tor_pid.m_ref = target_speed;
+    gimbal_tor_pid.m_fdb = motor_dm4310.para.vel;
+    float target_tor = gimbal_tor_pid.pid_cal(0);
+    mit_ctrl(&hcan1,3,0,0,0,0,target_tor);
+}
+
+void gimbal_tor_test(float target_speed)
+{
+    gimbal_tor_control(target_speed);
+}
+
+void gimbal_pitch_contrl(float *pitch)
+{
+
+    if(*pitch > pitch_max)
+    {
+        *pitch = pitch_max;
+    }
+    else if(*pitch < pitch_min)
+    {
+        *pitch = pitch_min;
+    }
+    uint8_t data[8];
+    data[0] = (int16_t)(*pitch*500)>>8;
+    data[1] = (int16_t)(*pitch*500);
+    data[2] = 0;
+    data[3] = 0;
+    data[4] = 0;
+    data[5] = 0;
+    data[6] = 0;
+    data[7] = 0;
+    CAN_Send_Msg(&hcan1,data,0x60,8);
 }
 

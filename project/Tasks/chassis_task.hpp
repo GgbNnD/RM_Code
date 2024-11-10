@@ -33,8 +33,10 @@ extern pid m3508_position_pid;
 void chassis_init(void);
 void chassis_normal(float target_vx, float target_vy);
 void chassis_cyro(float target_vx, float target_vy , float target_w);
-void chassis_follow_gimbal(float vx , float vy ,float *chassis_euler_angles, float *gimbal_euler_angles );
+//void chassis_follow_gimbal(float vx , float vy ,float *chassis_euler_angles, float *gimbal_euler_angles );
+void chassis_follow_gimbal(float vx , float vy ,Joint_Motor_t *motor);
 void m3508_test(void);
+void gimbalbased_chassis_move(float vx, float vy, float w, Joint_Motor_t *motor);
 
 #ifdef __cplusplus
 }
